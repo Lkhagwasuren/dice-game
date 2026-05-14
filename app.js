@@ -1,18 +1,43 @@
-// Тоглогчийн ээлжийг халгалах хувисагч, 1-р тоглогчийг 0,2-р тоглогчийг 1, гэж тэмдэглэе.
-var activePlayer = 0;
-// Toglogchiin tsugluulsan onoog hadgalah huwisagch
-var scores = [0, 0];
-// Toglogchiin eeljindee tsugluulj baigaa onooghadgalah huwisagch
-var roundScore = 0;
-// Shooni ali talaaraa buusniig hadgalah heregtei 1-6gesen utgaene huwisagchid sanamsargvigeer vvsgej ugnu
-//programm ehelhed beltgey
-document.getElementById("score-0").textContent = '0';
-document.getElementById("score-1").textContent = '0';
-document.getElementById("current-0").textContent = '0';
-document.getElementById("current-1").textContent = '0';
+// Togloomiin bvh gazart ashiglagdah global huwisagchdiig end zarly
+// henii eelj we gdgiig hadgalna
+var activePlayer;
+// 2 toglogchiin tsugluulsan onoonuud
+var scores;
+// idewhitei toglogchiin tsugluulj bga eeljiin ondoo
+var roundScore;
+// Shoonii zurgiig vzvvleh elementiig DOM-oos haij olood end hadgaly
 var diceDom = document.querySelector(".dice");
-diceDom.style.display = "none";
-// Shoog shideh event listener
+// Togloomiig shineer ehlehed beltgene
+//togloomiigehly
+initGame();
+function initGame() {
+    // Тоглогчийн ээлжийг халгалах хувисагч, 1-р тоглогчийг 0,2-р тоглогчийг 1, гэж тэмдэглэе.
+    activePlayer = 0;
+    // Toglogchiin tsugluulsan onoog hadgalah huwisagch
+    scores = [0, 0];
+    // Toglogchiin eeljindee tsugluulj baigaa onooghadgalah huwisagch
+    roundScore = 0;
+    //programm ehelhed beltgey
+    document.getElementById("score-0").textContent = '0';
+    document.getElementById("score-1").textContent = '0';
+    document.getElementById("current-0").textContent = '0';
+    document.getElementById("current-1").textContent = '0';
+
+    // toglogchdiin neriig butsaaj gargah
+    document.getElementById("name-0").textContent = "Player 1";
+    document.getElementById("name-1").textContent = "Player 2";
+
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+
+
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+
+    document.querySelector('.player-0-panel').classList.add('active');
+    diceDom.style.display = "none";
+}
+//Shoog shideh event listener
 document.querySelector(".btn-roll").addEventListener("click", function () {
     // 1-6 dotorh sanamsargui neg too gargaj awna
     var diceNumber = Math.floor(Math.random() * 6) + 1;
@@ -62,5 +87,5 @@ function switchToNextPlayer() {
     diceDom.style.display = "none";
 }
 
-// shine togloom ehlvvleh towchni eventlistener
-document.querySelector(".btn-new").addEventListener('click')
+// new game towch buyu shine togloom ehlvvleh towchnii eventlistener 
+document.querySelector(".btn-new").addEventListener("click", initGame);
