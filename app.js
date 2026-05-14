@@ -1,5 +1,7 @@
 // Togloomiin bvh gazart ashiglagdah global huwisagchdiig end zarly
-// henii eelj we gdgiig hadgalna
+// togloom duussan esehiig hadgalah tuluwiin huwisafch
+var isNewGame;
+
 var activePlayer;
 // 2 toglogchiin tsugluulsan onoonuud
 var scores;
@@ -11,6 +13,8 @@ var diceDom = document.querySelector(".dice");
 //togloomiigehly
 initGame();
 function initGame() {
+    // togloom ehlle gdgtuluwt oruulna
+    isNewGame = true;
     // Тоглогчийн ээлжийг халгалах хувисагч, 1-р тоглогчийг 0,2-р тоглогчийг 1, гэж тэмдэглэе.
     activePlayer = 0;
     // Toglogchiin tsugluulsan onoog hadgalah huwisagch
@@ -39,37 +43,44 @@ function initGame() {
 }
 //Shoog shideh event listener
 document.querySelector(".btn-roll").addEventListener("click", function () {
-    // 1-6 dotorh sanamsargui neg too gargaj awna
-    var diceNumber = Math.floor(Math.random() * 6) + 1;
-    // Shoornii zuragiigweb deer gargaj irne
-    diceDom.style.display = "block";
-    // buusan sanamsargui tooni hargalzah shoonii zurgiig web deer gargaj irne
-    diceDom.src = "dice-" + diceNumber + '.png';
-    // buusan too n 1ees ylgaatai bol idewhtei toglogchiin  eeljiin onoog oorchilno
-    if (diceNumber !== 1) {
-        //1-ees yalgaatai too buulaa. buusan toog toglogchid nemj ogno
-        roundScore = roundScore + diceNumber;
-        document.getElementById("current-" + activePlayer).textContent = roundScore;
+    if (isNewGame) {
+        // 1-6 dotorh sanamsargui neg too gargaj awna
+        var diceNumber = Math.floor(Math.random() * 6) + 1;
+        // Shoornii zuragiigweb deer gargaj irne
+        diceDom.style.display = "block";
+        // buusan sanamsargui tooni hargalzah shoonii zurgiig web deer gargaj irne
+        diceDom.src = "dice-" + diceNumber + '.png';
+        // buusan too n 1ees ylgaatai bol idewhtei toglogchiin  eeljiin onoog oorchilno
+        if (diceNumber !== 1) {
+            //1-ees yalgaatai too buulaa. buusan toog toglogchid nemj ogno
+            roundScore = roundScore + diceNumber;
+            document.getElementById("current-" + activePlayer).textContent = roundScore;
+        } else {
+            //1 buusan tul toglogchiin eeljiigene hesegt solij ogno
+            switchToNextPlayer()
+        }
     } else {
-        //1 buusan tul toglogchiin eeljiigene hesegt solij ogno
-        switchToNextPlayer()
+        alert("Тоглоом дууссан байна. NEW GAME товч дарж шинээр эхлүүлнэ үү.")
     }
 });
 // HOLD towchnii eventlistener
 document.querySelector(".btn-hold").addEventListener("click", function () {
-    // ug toglogchiin tsugluulsan eeljnii ongoog global onoon deer n nemj ogno.
-    scores[activePlayer] = scores[activePlayer] + roundScore;
-    document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
-    if (scores[activePlayer] >= 10) {
-        document.getElementById("name-" + activePlayer).textContent = 'Winner!!!';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    if (isNewGame === true) {
+        // ug toglogchiin tsugluulsan eeljnii ongoog global onoon deer n nemj ogno.
+        scores[activePlayer] = scores[activePlayer] + roundScore;
+        document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
+        if (scores[activePlayer] >= 10) {
+            // togloom duussan tuluwt oruulna
+            isNewGame = false;
+            document.getElementById("name-" + activePlayer).textContent = 'Winner!!!';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove("active");
+        } else {
+            switchToNextPlayer()
+        }
     } else {
-        switchToNextPlayer()
+        alert("Тоглоом дууссан байна. NEW GAME товч дарж шинээр эхлүүлнэ үү.")
     }
-    // delgets deer onoog n oorchilno
-
-    switchToNextPlayer()
 });
 // ene function n togloh eeljiig daraachiin toglogchruu shiljvvldeg
 function switchToNextPlayer() {
