@@ -1,16 +1,14 @@
 // Togloomiin bvh gazart ashiglagdah global huwisagchdiig end zarly
-// togloom duussan esehiig hadgalah tuluwiin huwisafch
+// togloom duussan esehiig hadgalah tuluwiin huwisagch
 var isNewGame;
-
 var activePlayer;
 // 2 toglogchiin tsugluulsan onoonuud
 var scores;
-// idewhitei toglogchiin tsugluulj bga eeljiin ondoo
+// idewhitei toglogchiin tsugluulj bga eeljiin onoo
 var roundScore;
 // Shoonii zurgiig vzvvleh elementiig DOM-oos haij olood end hadgaly
 var diceDom = document.querySelector(".dice");
 // Togloomiig shineer ehlehed beltgene
-//togloomiigehly
 initGame();
 function initGame() {
     // togloom ehlle gdgtuluwt oruulna
@@ -33,7 +31,6 @@ function initGame() {
 
     document.querySelector('.player-0-panel').classList.remove('winner');
     document.querySelector('.player-1-panel').classList.remove('winner');
-
 
     document.querySelector('.player-0-panel').classList.remove('active');
     document.querySelector('.player-1-panel').classList.remove('active');
