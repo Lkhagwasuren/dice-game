@@ -66,7 +66,7 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
         // ug toglogchiin tsugluulsan eeljnii ongoog global onoon deer n nemj ogno.
         scores[activePlayer] = scores[activePlayer] + roundScore;
         document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= 10) {
             // togloom duussan tuluwt oruulna
             isNewGame = false;
             document.getElementById("name-" + activePlayer).textContent = 'Winner!!!';
